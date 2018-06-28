@@ -1,9 +1,6 @@
-const baseURL = process.env.NODE_ENV === 'production'
-  ?
-  'bluh'
-  :
-  'http://localhost:1717';
+const siteURL = process.env.NODE_ENV === 'production' ? 'http://vcm-3422.vm.duke.edu' : 'http://localhost';
+const postFix = process.env.NODE_ENV === 'production' ? '/api' : ':1717';
 
 module.exports = {
-  baseURL,
+  baseURL: `${siteURL}${postFix}`,
 };
