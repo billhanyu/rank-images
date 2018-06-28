@@ -46,17 +46,19 @@ class Rate extends Component {
         {
           this.state.first &&
           <img
-            className="candidate candidate-left"
+            className='candidate candidate-left'
             src={`${baseURL}/image/${this.state.first}`}
             onClick={() => this.rate(0)}
+            alt='left'
           />
         }
         {
           this.state.second &&
           <img
-            className="candidate candidate-right"
+            className='candidate candidate-right'
             src={`${baseURL}/image/${this.state.second}`}
             onClick={() => this.rate(0)}
+            alt='right'
           />
         }
       </div>
