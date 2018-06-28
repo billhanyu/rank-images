@@ -1,0 +1,30 @@
+{
+  "name": "rank",
+  "version": "0.1.0",
+  "private": true,
+  "devDependencies": {
+    "eslint": "^5.0.1",
+    "eslint-config-google": "^0.9.1",
+    "nodemon": "^1.17.5",
+    "react-scripts": "1.1.4"
+  },
+  "dependencies": {
+    "babel-cli": "^6.26.0",
+    "body-parser": "^1.18.3",
+    "cookie-parser": "^1.4.3",
+    "cors": "^2.8.4",
+    "cross-env": "^5.2.0",
+    "mongoose": "^5.1.7",
+    "react": "^16.4.1",
+    "react-dom": "^16.4.1",
+    "sharp": "^0.20.5"
+  },
+  "scripts": {
+    "server": "cross-env NODE_ENV=development nodemon --exec babel-node server/server.js",
+    "build-server": "cross-env NODE_ENV=production babel -d ./build ./server -s",
+    "start": "react-scripts start",
+    "build": "react-scripts build",
+    "test": "react-scripts test --env=jsdom",
+    "eject": "react-scripts eject"
+  }
+}
