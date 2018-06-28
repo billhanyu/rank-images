@@ -1,5 +1,16 @@
+.candidate-container {
+  width: 50%;
+  height: 300px;
+  display: flex;
+  justify-content: center;
+  float: left;
+}
+
 .candidate {
   cursor: pointer;
+  width: auto;
+  height: 100%;
+  max-width: 100%;
 }
 
 h1 {

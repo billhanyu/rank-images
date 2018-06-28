@@ -11,22 +11,32 @@ class Rate extends Component {
       second: '',
       queueEntryId: '',
     };
+    this.keyDown = this.keyDown.bind(this);
   }
 
   componentWillMount() {
     nextEntryForUser(this.props.match.params.userid)
       .then(response => {
-        console.log(response.data);
         const entry = response.data;
         this.setState({
           first: entry.first,
           second: entry.second,
           queueEntryId: entry._id,
+        }, () => {
+          document.addEventListener('keydown', this.keyDown, false);
         });
       })
       .catch(() => {
         alert('Error. Wrong user id?');
       });
+  }
+
+  keyDown(event) {
+    if (event.keyCode === 37) {
+      this.rate(0);
+    } else if (event.keyCode === 39) {
+      this.rate(1);
+    }
   }
 
   rate(votedFor) {
@@ -42,24 +52,28 @@ class Rate extends Component {
   render() {
     return (
       <div>
-        <h1>left or right?</h1>
+        <h1>left or right? (arrow keys work)</h1>
         {
           this.state.first &&
-          <img
-            className='candidate candidate-left'
-            src={`${baseURL}/image/${this.state.first}`}
-            onClick={() => this.rate(0)}
-            alt='left'
-          />
+          <div className='candidate-container'>
+            <img
+              className='candidate candidate-left'
+              src={`${baseURL}/image/${this.state.first}`}
+              onClick={() => this.rate(0)}
+              alt='left'
+            />
+          </div>
         }
         {
           this.state.second &&
-          <img
-            className='candidate candidate-right'
-            src={`${baseURL}/image/${this.state.second}`}
-            onClick={() => this.rate(0)}
-            alt='right'
-          />
+          <div className='candidate-container'>
+            <img
+              className='candidate candidate-right'
+              src={`${baseURL}/image/${this.state.second}`}
+              onClick={() => this.rate(0)}
+              alt='right'
+            />
+          </div>
         }
       </div>
     );
