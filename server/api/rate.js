@@ -21,16 +21,17 @@ router.get('/:userid', (req, res, next) => {
     return res.status(422).send('User has already completed all ratings');
   }
 
-  let nextEntry;
   if (!req.user.nextQueueEntry) {
     Queue.find({}).limit(1).exec()
-      .then(entry => nextEntry = entry)
+      .then(entry => {
+        req.user.nextQueueEntry = entry;
+        res.json(entry);
+        return req.user.save();
+      })
       .catch(next);
   } else {
-    nextEntry = req.user.nextQueueEntry;
+    res.json(req.user.nextQueueEntry);
   }
-
-  res.json(nextEntry);
 });
 
 // body format
@@ -60,3 +61,5 @@ router.post('/:userid', (req, res, next) => {
     .then(() => res.sendStatus(200))
     .catch(next);
 });
+
+module.exports = router;
