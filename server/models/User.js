@@ -8,6 +8,7 @@ const UserSchema = new mongoose.Schema({
   nextQueueEntry: {
     type: mongoose.Schema.Types.ObjectId,
     ref: 'Queue',
+    default: null,
   },
   completed: {
     type: Boolean,

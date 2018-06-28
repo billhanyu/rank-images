@@ -12,22 +12,25 @@ router.param('userid', (req, res, next, userid) => {
         return res.status(404).send('user not found');
       }
       req.user = found;
+      next();
     })
     .catch(next);
 });
 
 router.get('/:userid', (req, res, next) => {
-  if (!req.user.completed) {
+  if (req.user.completed) {
     return res.status(422).send('User has already completed all ratings');
   }
 
+  let entry;
   if (!req.user.nextQueueEntry) {
-    Queue.find({}).limit(1).exec()
-      .then(entry => {
+    Queue.find({}).sort('_id').limit(1).exec()
+      .then(found => {
+        entry = found[0];
         req.user.nextQueueEntry = entry;
-        res.json(entry);
         return req.user.save();
       })
+      .then(() => res.json(entry))
       .catch(next);
   } else {
     res.json(req.user.nextQueueEntry);
@@ -38,6 +41,10 @@ router.get('/:userid', (req, res, next) => {
 // queueEntryId: ObjectId of the queue entry rated
 // votedFor: 0 for first, 1 for second
 router.post('/:userid', (req, res, next) => {
+  if (req.body.queueEntryId !== req.user.nextQueueEntry._id.toString()) {
+    return res.status(422).send('not rating the expected pair.');
+  }
+
   const rating = new Rating({
     user: req.user,
     queueEntry: req.body.queueEntryId,
@@ -51,10 +58,10 @@ router.post('/:userid', (req, res, next) => {
         .exec();
     })
     .then(next => {
-      if (!next) {
+      if (next.length < 1) {
         req.user.completed = true;
       } else {
-        req.user.nextQueueEntry = next;
+        req.user.nextQueueEntry = next[0];
       }
       return req.user.save();
     })
