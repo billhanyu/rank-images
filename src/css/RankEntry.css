@@ -1,7 +1,30 @@
-.RankEntryImage {
+.RankEntryContainer {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 25px;
+}
 
+.RankEntryImage {
+  max-width: 300px;
+  height: auto;
+  margin-bottom: 10px;
 }
 
 .RankEntryVote {
+  font-size: 18px;
+  font-weight: 800;
+}
 
+.likeIcon {
+  width: 30px;
+  height: 30px;
+  margin-right: 5px;
+}
+
+.VoteNumberDisplay {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
 }

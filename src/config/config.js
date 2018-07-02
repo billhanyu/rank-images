@@ -3,4 +3,6 @@ const postFix = process.env.NODE_ENV === 'production' ? '/api' : ':1717';
 
 module.exports = {
   baseURL: `${siteURL}${postFix}`,
+  paginationDisplayCount: 5,
+  entriesPerPage: 30,
 };

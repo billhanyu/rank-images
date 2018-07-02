@@ -4,11 +4,23 @@
   display: flex;
   justify-content: center;
   float: left;
+  align-items: center;
 }
 
 .candidate {
   cursor: pointer;
   width: auto;
-  height: 100%;
   max-width: 100%;
+  max-height: 100%;
+}
+
+@media screen and (max-width: 600px) {
+  .candidate-container {
+    width: 100%;
+    height: inherit;
+  }
+
+  .candidate {
+    width: 100%;
+  }
 }

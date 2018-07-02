@@ -65,6 +65,21 @@ router.post('/:userid', (req, res, next) => {
       }
       return req.user.save();
     })
+    .then(() => {
+      return Queue.findById(req.body.queueEntryId)
+        .populate('first')
+        .populate('second')
+        .exec();
+    })
+    .then(queue => {
+      if (req.body.votedFor === 0) {
+        queue.first.votes++;
+        return queue.first.save();
+      } else {
+        queue.second.votes++;
+        return queue.second.save();
+      }
+    })
     .then(() => res.sendStatus(200))
     .catch(next);
 });

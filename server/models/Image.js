@@ -1,8 +1,19 @@
 const mongoose = require('mongoose');
 
-const ImageShcema = new mongoose.Schema({
+const ImageSchema = new mongoose.Schema({
   data: Buffer,
   contentType: String,
+  votes: {
+    type: Number,
+    default: 0,
+  },
 }, { timestamps: true });
 
-mongoose.model('Image', ImageShcema);
+ImageSchema.methods.toJson = function() {
+  return {
+    votes: this.votes,
+    id: this._id,
+  };
+};
+
+mongoose.model('Image', ImageSchema);

@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import '../css/Home.css';
+import { Link } from 'react-router-dom';
 
 class Home extends Component {
   constructor(props) {
@@ -39,6 +40,9 @@ class Home extends Component {
             onKeyDown={this.onKeyDown}
             onChange={this.onChangeUserid}
           />
+        </div>
+        <div className='NavigationLinks'>
+          <Link to='/rank'>Overall Ranking</Link>
         </div>
       </div>
     );

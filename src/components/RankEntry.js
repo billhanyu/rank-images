@@ -1,16 +1,26 @@
 import React, { Component } from 'react';
 import '../css/RankEntry.css';
+import likeIcon from '../assets/like.png';
+
+const { baseURL } = require('../config/config');
 
 class RankEntry extends Component {
   render() {
     return (
-      <div>
+      <div className='RankEntryContainer'>
         <img
           className='RankEntryImage'
-          src={this.props.src}
-          alt={this.props.src}
+          src={`${baseURL}/image/${this.props.id}`}
+          alt={this.props.id}
         />
-        <span className='RankEntryVote'>{this.props.vote}</span>
+        <div className='VoteNumberDisplay'>
+          <img
+            className='likeIcon'
+            src={likeIcon}
+            alt='like'
+          />
+          <span className='RankEntryVote'>{this.props.votes}</span>
+        </div>
       </div>
     );
   }

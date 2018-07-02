@@ -24,6 +24,7 @@ app.use(cookieParser());
 // api endpoints
 app.use('/image', require('./api/image'));
 app.use('/rate', require('./api/rate'));
+app.use('/rank', require('./api/rank'));
 
 // catch 404 and forward to error handler
 app.use((req, res, next) => {

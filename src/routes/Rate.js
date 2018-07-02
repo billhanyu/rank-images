@@ -2,6 +2,7 @@ import '../css/Rate.css';
 import React, { Component } from 'react';
 import { nextEntryForUser, rateEntry } from '../utils/api';
 const { baseURL } = require('../config/config');
+import { Link } from 'react-router-dom';
 
 class Rate extends Component {
   constructor(props) {
@@ -52,7 +53,7 @@ class Rate extends Component {
   render() {
     return (
       <div>
-        <h1>left or right? (arrow keys work)</h1>
+        <h1>Which one is better? (arrow keys work)</h1>
         {
           this.state.first &&
           <div className='candidate-container'>
@@ -75,6 +76,10 @@ class Rate extends Component {
             />
           </div>
         }
+        <div className='NavigationLinks'>
+          <Link className='NavigationLink' to='/'>Home</Link>
+          <Link className='NavigationLink' to='/rank'>Overall Ranking</Link>
+        </div>
       </div>
     );
   }
