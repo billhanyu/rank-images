@@ -3,6 +3,7 @@ import { hot } from 'react-hot-loader';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import Home from './routes/Home';
 import Rate from './routes/Rate';
+import Rank from './routes/Rank';
 
 class App extends Component {
   render() {
@@ -18,6 +19,11 @@ class App extends Component {
             name='rate'
             path='/rate/:userid'
             component={Rate}
+          />
+          <Route
+            name='rank'
+            path='/rank'
+            component={Rank}
           />
         </Switch>
       </Router>

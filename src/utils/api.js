@@ -15,3 +15,7 @@ export function rateEntry(userid, queueEntryId, votedFor) {
     votedFor,
   });
 }
+
+// export function allRank(limit, offset) {
+//   return instance.get()
+// }
