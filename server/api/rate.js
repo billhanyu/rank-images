@@ -33,7 +33,10 @@ router.get('/:userid', (req, res, next) => {
       .then(() => res.json(entry))
       .catch(next);
   } else {
-    res.json(req.user.nextQueueEntry);
+    res.json({
+      username: req.user.name,
+      queue: req.user.nextQueueEntry,
+    });
   }
 });
 

@@ -8,6 +8,7 @@ class Rate extends Component {
   constructor(props) {
     super(props);
     this.state = {
+      username: '',
       first: '',
       second: '',
       queueEntryId: '',
@@ -18,8 +19,10 @@ class Rate extends Component {
   componentWillMount() {
     nextEntryForUser(this.props.match.params.userid)
       .then(response => {
-        const entry = response.data;
+        const entry = response.data.queue;
+        console.log(response.data);
         this.setState({
+          username: response.data.username,
           first: entry.first,
           second: entry.second,
           queueEntryId: entry._id,
@@ -54,6 +57,7 @@ class Rate extends Component {
     return (
       <div>
         <h1>Which one is better? (arrow keys work)</h1>
+        <h3>Rating as {this.state.username}</h3>
         {
           this.state.first &&
           <div className='candidate-container'>
