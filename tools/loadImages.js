@@ -42,17 +42,19 @@ Promise.all(saveImagePromises)
     savedImages = saved;
     console.log('saved all iamges');
 
-    const saveQueuePromises = [];
+    const queues = [];
 
     for (let i = 0; i < savedImages.length; i++) {
       for (let j = i + 1; j < savedImages.length; j++) {
-        const entry = new Queue({
+        const entry = {
           first: savedImages[i],
           second: savedImages[j],
-        });
-        saveQueuePromises.push(entry.save());
+        };
+        queues.push(entry);
       }
     }
+    shuffleArray(queues);
+    const saveQueuePromises = queues.map(queue => new Queue(queue).save());
     return Promise.all(saveQueuePromises);
   })
   .then(() => {
@@ -63,3 +65,12 @@ Promise.all(saveImagePromises)
     console.error(err);
     process.exit(1);
   });
+
+function shuffleArray(array) {
+  for (let i = array.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    const temp = array[i];
+    array[i] = array[j];
+    array[j] = temp;
+  }
+}
