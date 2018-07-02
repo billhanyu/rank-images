@@ -17,6 +17,8 @@ services:
     restart: always
     volumes:
       - /data/db:/data/db
+    ports:
+      - "27017:27017"
   web:
     build:
       context: ./
