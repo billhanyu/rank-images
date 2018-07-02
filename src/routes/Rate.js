@@ -1,7 +1,7 @@
-import './Rate.css';
+import '../css/Rate.css';
 import React, { Component } from 'react';
-import { nextEntryForUser, rateEntry } from './api';
-const { baseURL } = require('./config');
+import { nextEntryForUser, rateEntry } from '../utils/api';
+const { baseURL } = require('../config/config');
 
 class Rate extends Component {
   constructor(props) {
@@ -57,7 +57,7 @@ class Rate extends Component {
           this.state.first &&
           <div className='candidate-container'>
             <img
-              className='candidate candidate-left'
+              className='candidate'
               src={`${baseURL}/image/${this.state.first}`}
               onClick={() => this.rate(0)}
               alt='left'
@@ -68,7 +68,7 @@ class Rate extends Component {
           this.state.second &&
           <div className='candidate-container'>
             <img
-              className='candidate candidate-right'
+              className='candidate'
               src={`${baseURL}/image/${this.state.second}`}
               onClick={() => this.rate(0)}
               alt='right'
